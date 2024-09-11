@@ -40,6 +40,28 @@
             background-color: #105b52;
             color: white;
         }
+
+        .card-title {
+            color: #136f63;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .card-price {
+            font-size: 36px;
+            font-weight: bold;
+            color: #136f63;
+            text-align: left;
+        }
+
+        .btn-subscribe {
+            background-color: #136f63;
+            color: white;
+        }
+
+        .btn-subscribe:hover {
+            background-color: #105b52;
+        }
     </style>
 </head>
 
@@ -98,7 +120,7 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="courseDurationValue" class="form-label">Course Duration</label>
-                            <select class="form-select" id="courseDurationValue" name="courseDurationValue" required>
+                            <select class="form-select" id="courseDurationValue"                                     name="courseDurationValue" required>
                                 <option value="">Select duration</option>
                                 <!-- Values from 1 to 31 for duration -->
                                 <script>
@@ -120,10 +142,59 @@
                         </div>
                     </div>
 
-                    <!-- Course Price -->
-                    <div class="mb-3">
-                        <label for="coursePrice" class="form-label">Course Price (in USD)</label>
-                        <input type="text" class="form-control" id="coursePrice" name="coursePrice" required min="0" step="0.01">
+                    <!-- Course Subscription Cards -->
+                    <div class="row justify-content-center">
+                        <p>Courses Subscription</p>
+                        <!-- Basic Plan Card -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Basic Plan</h5>
+                                    <p class="card-text">Ideal for beginners, offering access to fundamental courses.</p>
+                                    <p class="card-price">$19.99</p>
+                                    <ul class="list-unstyled">
+                                        <li>Access to 10 courses</li>
+                                        <li>1-month duration</li>
+                                        <li>Basic support</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-subscribe">Subscribe Now</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Premium Plan Card -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Premium Plan</h5>
+                                    <p class="card-text">Best for dedicated learners with access to all advanced courses.</p>
+                                    <p class="card-price">$49.99</p>
+                                    <ul class="list-unstyled">
+                                        <li>Access to 50 courses</li>
+                                        <li>6-months duration</li>
+                                        <li>Premium support</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-subscribe">Subscribe Now</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Enterprise Plan Card -->
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Enterprise Plan</h5>
+                                    <p class="card-text">Unlimited access for teams and professionals, including all features.</p>
+                                    <p class="card-price">$99.99</p>
+                                    <ul class="list-unstyled">
+                                        <li>Unlimited course access</li>
+                                        <li>1-year duration</li>
+                                        <li>Dedicated support</li>
+                                    </ul>
+                                    <a href="#" class="btn btn-subscribe">Subscribe Now</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Submit Button -->
@@ -154,13 +225,6 @@
             // Check if both duration value and unit are selected
             if (durationValue.value === "" || durationUnit.value === "") {
                 alert('Please select both the course duration and its unit.');
-                event.preventDefault();
-            }
-
-            // Check for negative price input
-            const priceInput = document.getElementById('coursePrice');
-            if (parseFloat(priceInput.value) < 0) {
-                alert('Price cannot be negative.');
                 event.preventDefault();
             }
         });
