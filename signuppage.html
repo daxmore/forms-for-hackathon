@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Multilevel Signup Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h2>Signup Form</h2>
+
+        <!-- Step 1: Choose if freelancer or client -->
+        <div class="form-group">
+            <label for="user-type">Are you a freelancer or a client?</label>
+            <select id="user-type">
+                <option value="" disabled selected>Select one</option>
+                <option value="freelancer">Freelancer</option>
+                <option value="client">Client</option>
+            </select>
+        </div>
+
+        <!-- Step 2: Basic Information (common for both) -->
+        <div id="basic-info" class="hidden">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
+            </div>
+        </div>
+
+        <!-- Step 3a: Freelancer specific information -->
+        <div id="freelancer-info" class="hidden">
+            <div class="form-group">
+                <label for="certificates">Certificates</label>
+                <textarea id="certificates" placeholder="List your certificates"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="education">Education</label>
+                <input type="text" id="education" placeholder="Enter your education">
+            </div>
+        </div>
+
+        <!-- Step 3b: Client specific (no extra fields, redirect to homepage) -->
+
+        <button id="submit-btn" class="hidden">Submit</button>
+    </div>
+
+    <script>
+        const userTypeSelect = document.getElementById('user-type');
+        const basicInfoSection = document.getElementById('basic-info');
+        const freelancerInfoSection = document.getElementById('freelancer-info');
+        const submitBtn = document.getElementById('submit-btn');
+
+        userTypeSelect.addEventListener('change', function () {
+            const userType = userTypeSelect.value;
+
+            // Show the basic information fields
+            basicInfoSection.classList.remove('hidden');
+            submitBtn.classList.remove('hidden');
+
+            // If freelancer is selected, show freelancer-specific fields
+            if (userType === 'freelancer') {
+                freelancerInfoSection.classList.remove('hidden');
+            } else {
+                freelancerInfoSection.classList.add('hidden');
+            }
+        });
+
+        submitBtn.addEventListener('click', function () {
+            const userType = userTypeSelect.value;
+
+            if (userType === 'client') {
+                // Redirect client to the home page after submitting
+                window.location.href = 'home.html'; // Change to your homepage URL
+            } else if (userType === 'freelancer') {
+                // Submit the form data (implement actual backend logic here)
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const certificates = document.getElementById('certificates').value;
+                const education = document.getElementById('education').value;
+
+                // Example: Save the freelancer data (you would typically send this to the server)
+                console.log({
+                    userType,
+                    name,
+                    email,
+                    password,
+                    certificates,
+                    education
+                });
+
+                alert('Freelancer signup complete!');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
